@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/matrix_transform.h>
+#include "peterson30-layouts.dtsi"
+
+&physical_layout0 {
+    transform = <&matrix_transform0>;
+};
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
+    };
+
+    matrix_transform0: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <10>;
+        rows = <10>;
+        map = <
+    RC(7,0) RC(6,0) RC(0,1) RC(8,1) RC(9,1)
+    RC(6,2) RC(8,2) RC(2,3) RC(7,3) RC(9,3)
+            RC(7,4) RC(8,4) RC(4,5)
+                          RC(6,5) RC(9,5)
+        >;
+    };
+
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-charlieplex";
+        wakeup-source;
+
+        gpios
+            = <&xiao_d 0 GPIO_OPEN_SOURCE> //GPIO_OPEN_SOURCE
+            , <&xiao_d 1 GPIO_OPEN_SOURCE>
+            , <&xiao_d 2 GPIO_OPEN_SOURCE>
+            , <&xiao_d 3 GPIO_OPEN_SOURCE>
+            , <&xiao_d 4 GPIO_OPEN_SOURCE>
+            , <&xiao_d 5 GPIO_OPEN_SOURCE>
+            , <&xiao_d 6 GPIO_OPEN_SOURCE>
+            , <&xiao_d 7 GPIO_OPEN_SOURCE>
+            , <&xiao_d 8 GPIO_OPEN_SOURCE>
+            , <&xiao_d 9 GPIO_OPEN_SOURCE>
+            ;
+    };
+};

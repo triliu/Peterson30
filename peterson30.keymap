@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+#define DEF_L 0
+#define NAV_L 1
+
+// Using layer taps on thumbs, having quick tap as well helps w/ repeating space/backspace
+&lt { quick-tap-ms = <200>; };
+
+/ {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <225>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp Q   &kp W   &kp E   &kp R   &kp T
+                &kp A   &kp S   &kp D   &kp F   &kp G
+                        &kp X   &kp C   &kp V
+                                        &kp P  &kp L
+            >;
+        };
+
+        nav_layer {
+            display-name = "Nav";
+            bindings = <
+                &trans           &kp HOME       &kp UP &kp PG_UP  &trans
+                &trans           &kp LEFT       &kp DOWN &kp RIGHT   &trans
+                           &kp END        &trans   &kp PG_DN
+                           &kp ESC          &kp DEL
+            >;
+        };
+    };
+};
